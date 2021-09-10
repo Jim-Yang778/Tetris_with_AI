@@ -177,6 +177,33 @@ src/game.cpp.s:
 	$(MAKE) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/src/game.cpp.s
 .PHONY : src/game.cpp.s
 
+src/gameboard.o: src/gameboard.cpp.o
+
+.PHONY : src/gameboard.o
+
+# target to build an object file
+src/gameboard.cpp.o:
+	$(MAKE) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/src/gameboard.cpp.o
+.PHONY : src/gameboard.cpp.o
+
+src/gameboard.i: src/gameboard.cpp.i
+
+.PHONY : src/gameboard.i
+
+# target to preprocess a source file
+src/gameboard.cpp.i:
+	$(MAKE) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/src/gameboard.cpp.i
+.PHONY : src/gameboard.cpp.i
+
+src/gameboard.s: src/gameboard.cpp.s
+
+.PHONY : src/gameboard.s
+
+# target to generate assembly for a file
+src/gameboard.cpp.s:
+	$(MAKE) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/src/gameboard.cpp.s
+.PHONY : src/gameboard.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -273,6 +300,9 @@ help:
 	@echo "... src/game.o"
 	@echo "... src/game.i"
 	@echo "... src/game.s"
+	@echo "... src/gameboard.o"
+	@echo "... src/gameboard.i"
+	@echo "... src/gameboard.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

@@ -6,21 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/jinyu/Tetris/src/renderer.cpp
-renderer.h
-/home/jinyu/Tetris/src/renderer.h
+/home/jinyu/Tetris/src/gameboard.cpp
+gameboard.h
+/home/jinyu/Tetris/src/gameboard.h
 iostream
 -
-string
--
 
-/home/jinyu/Tetris/src/renderer.h
-vector
--
+/home/jinyu/Tetris/src/gameboard.h
 SDL.h
 /home/jinyu/Tetris/src/SDL.h
 tetris.h
 /home/jinyu/Tetris/src/tetris.h
+random
+-
 
 /home/jinyu/Tetris/src/tetris.h
 SDL.h

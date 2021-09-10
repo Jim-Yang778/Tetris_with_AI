@@ -4,7 +4,7 @@
 #include "SDL.h"
 #include <vector>
 
-constexpr int BRICK_SIZE = 22;
+constexpr int BRICK_SIZE = 30;
 
 enum class Mino : int {
   straight_mino = 0,
@@ -27,7 +27,7 @@ class Tetris {
 public:
   Tetris() : Tetris(Mino::straight_mino) {}
   Tetris(Mino type, double x, double y);
-  Tetris(Mino type) : Tetris(type, 5, 4) {}
+  Tetris(Mino type) : Tetris(type, 0, 0) {}
   Tetris(const Tetris &source);
   Tetris &operator=(const Tetris &source);
   Tetris(Tetris &&source) = default;
@@ -55,6 +55,7 @@ public:
   }
   void SetY(bool turn_down) {
     if (turn_down) ++y_;
+    else --y_;
   }
 
 private:

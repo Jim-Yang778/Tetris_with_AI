@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/jinyu/Tetris/src/controller.cpp" "/home/jinyu/Tetris/build/CMakeFiles/Tetris.dir/src/controller.cpp.o"
   "/home/jinyu/Tetris/src/game.cpp" "/home/jinyu/Tetris/build/CMakeFiles/Tetris.dir/src/game.cpp.o"
+  "/home/jinyu/Tetris/src/gameboard.cpp" "/home/jinyu/Tetris/build/CMakeFiles/Tetris.dir/src/gameboard.cpp.o"
   "/home/jinyu/Tetris/src/main.cpp" "/home/jinyu/Tetris/build/CMakeFiles/Tetris.dir/src/main.cpp.o"
   "/home/jinyu/Tetris/src/renderer.cpp" "/home/jinyu/Tetris/build/CMakeFiles/Tetris.dir/src/renderer.cpp.o"
   "/home/jinyu/Tetris/src/tetris.cpp" "/home/jinyu/Tetris/build/CMakeFiles/Tetris.dir/src/tetris.cpp.o"

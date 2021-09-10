@@ -3,7 +3,7 @@
 #include <iostream>
 
 Game::Game() {
-  gameboard = Gameboard();
+  game_board = Gameboard();
 }
 
 void Game::Run(Controller const &controller, Renderer &renderer,
@@ -19,9 +19,9 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
-    controller.HandleInput(running, gameboard);
-    // Update();
-    renderer.Render(gameboard);
+    controller.HandleInput(running, game_board);
+    Update();
+    renderer.Render(game_board);
 
     frame_end = SDL_GetTicks();
 
@@ -47,7 +47,8 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 }
 
 void Game::Update() {
-  
+  game_board.FreshBoard();
+  game_board.PlaceMino();
 }
 
 int Game::GetScore() const { return score; }

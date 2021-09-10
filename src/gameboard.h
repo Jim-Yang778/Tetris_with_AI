@@ -16,17 +16,22 @@ public:
   Gameboard &operator=(Gameboard &&source) = default;
   ~Gameboard() = default;
 
-  Mino RandomMino();
-  void GetNextMino();
-  void MoveMino(Direction dir);
+  void FreshBoard() { board = firm_board; }
+  void PlaceMino();
+  void MoveMino(Direction& dir);
+  bool DetectBlock(Direction& dir);
   void Rotate();
-  void draw(SDL_Rect block);
+  bool IsTetris(double x, double y) const;
+  void Draw(SDL_Renderer *sdl_renderer, SDL_Rect &block) const;
 
 private:
   std::random_device dev;
   std::mt19937 engine;
   std::uniform_int_distribution<int> random_tetris{0, 6};
+  Mino RandomMino();
+  void GetNextMino();
 
+  std::vector<std::vector<Mino>> firm_board;
   std::vector<std::vector<Mino>> board;
   Tetris tetris;
   Tetris next_tetris;

@@ -11,7 +11,7 @@ class Renderer {
            const std::size_t grid_width, const std::size_t grid_height);
   ~Renderer();
 
-  void Render(Gameboard const gameboard);
+  void Render(Gameboard& gameboard);
   void UpdateWindowTitle(int score, int fps);
 
  private:

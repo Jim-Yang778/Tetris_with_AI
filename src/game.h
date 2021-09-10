@@ -15,7 +15,7 @@ public:
   int GetScore() const;
 
 private:
-  Gameboard gameboard;
+  Gameboard game_board;
 
   int score{0};
 
