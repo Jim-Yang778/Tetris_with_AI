@@ -1,5 +1,6 @@
 #include "game.h"
 #include "SDL.h"
+#include <cmath>
 #include <iostream>
 
 Game::Game() {
@@ -20,7 +21,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
     // Input, Update, Render - the main game loop.
     controller.HandleInput(running, game_board);
-    Update();
+    Update(running);
     renderer.Render(game_board);
 
     frame_end = SDL_GetTicks();
@@ -32,9 +33,10 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
     // After every second, update the window title.
     if (frame_end - title_timestamp >= 1000) {
-      renderer.UpdateWindowTitle(score, frame_count);
+      renderer.UpdateWindowTitle(GetScore(), frame_count);
       frame_count = 0;
       title_timestamp = frame_end;
+      game_board.MoveMino(Direction::down);
     }
 
     // If the time for this frame is too small (i.e. frame_duration is
@@ -46,9 +48,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   }
 }
 
-void Game::Update() {
+void Game::Update(bool& running) {
   game_board.FreshBoard();
-  game_board.PlaceMino();
+  game_board.PlaceMino(running);
 }
-
-int Game::GetScore() const { return score; }

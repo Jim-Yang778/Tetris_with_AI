@@ -73,6 +73,7 @@ CMakeFiles/Tetris.dir/src/game.cpp.o: /usr/include/SDL2/SDL_gamecontroller.h
 CMakeFiles/Tetris.dir/src/game.cpp.o: /usr/include/SDL2/SDL_gesture.h
 CMakeFiles/Tetris.dir/src/game.cpp.o: /usr/include/SDL2/SDL_haptic.h
 CMakeFiles/Tetris.dir/src/game.cpp.o: /usr/include/SDL2/SDL_hints.h
+CMakeFiles/Tetris.dir/src/game.cpp.o: /usr/include/SDL2/SDL_image.h
 CMakeFiles/Tetris.dir/src/game.cpp.o: /usr/include/SDL2/SDL_joystick.h
 CMakeFiles/Tetris.dir/src/game.cpp.o: /usr/include/SDL2/SDL_keyboard.h
 CMakeFiles/Tetris.dir/src/game.cpp.o: /usr/include/SDL2/SDL_keycode.h
@@ -174,6 +175,7 @@ CMakeFiles/Tetris.dir/src/main.cpp.o: /usr/include/SDL2/SDL_gamecontroller.h
 CMakeFiles/Tetris.dir/src/main.cpp.o: /usr/include/SDL2/SDL_gesture.h
 CMakeFiles/Tetris.dir/src/main.cpp.o: /usr/include/SDL2/SDL_haptic.h
 CMakeFiles/Tetris.dir/src/main.cpp.o: /usr/include/SDL2/SDL_hints.h
+CMakeFiles/Tetris.dir/src/main.cpp.o: /usr/include/SDL2/SDL_image.h
 CMakeFiles/Tetris.dir/src/main.cpp.o: /usr/include/SDL2/SDL_joystick.h
 CMakeFiles/Tetris.dir/src/main.cpp.o: /usr/include/SDL2/SDL_keyboard.h
 CMakeFiles/Tetris.dir/src/main.cpp.o: /usr/include/SDL2/SDL_keycode.h
@@ -224,6 +226,7 @@ CMakeFiles/Tetris.dir/src/renderer.cpp.o: /usr/include/SDL2/SDL_gamecontroller.h
 CMakeFiles/Tetris.dir/src/renderer.cpp.o: /usr/include/SDL2/SDL_gesture.h
 CMakeFiles/Tetris.dir/src/renderer.cpp.o: /usr/include/SDL2/SDL_haptic.h
 CMakeFiles/Tetris.dir/src/renderer.cpp.o: /usr/include/SDL2/SDL_hints.h
+CMakeFiles/Tetris.dir/src/renderer.cpp.o: /usr/include/SDL2/SDL_image.h
 CMakeFiles/Tetris.dir/src/renderer.cpp.o: /usr/include/SDL2/SDL_joystick.h
 CMakeFiles/Tetris.dir/src/renderer.cpp.o: /usr/include/SDL2/SDL_keyboard.h
 CMakeFiles/Tetris.dir/src/renderer.cpp.o: /usr/include/SDL2/SDL_keycode.h

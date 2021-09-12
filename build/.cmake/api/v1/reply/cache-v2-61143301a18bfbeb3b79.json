@@ -1134,6 +1134,30 @@
 			"value" : "FALSE"
 		},
 		{
+			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_SDL2_image",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Details about finding SDL2_image"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "[/usr/lib/x86_64-linux-gnu/libSDL2_image.so][/usr/include/SDL2][v()]"
+		},
+		{
+			"name" : "SDL2IMAGE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for SDL2IMAGE."
+				}
+			],
+			"type" : "PATH",
+			"value" : "SDL2IMAGE_DIR-NOTFOUND"
+		},
+		{
 			"name" : "SDL2Test_BINARY_DIR",
 			"properties" : 
 			[
@@ -1168,6 +1192,50 @@
 			],
 			"type" : "PATH",
 			"value" : "/usr/lib/x86_64-linux-gnu/cmake/SDL2"
+		},
+		{
+			"name" : "SDL2_IMAGE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for SDL2_IMAGE."
+				}
+			],
+			"type" : "PATH",
+			"value" : "SDL2_IMAGE_DIR-NOTFOUND"
+		},
+		{
+			"name" : "SDL2_IMAGE_INCLUDE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a file."
+				}
+			],
+			"type" : "PATH",
+			"value" : "/usr/include/SDL2"
+		},
+		{
+			"name" : "SDL2_IMAGE_LIBRARY",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/lib/x86_64-linux-gnu/libSDL2_image.so"
 		}
 	],
 	"kind" : "cache",

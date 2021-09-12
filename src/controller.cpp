@@ -31,7 +31,9 @@ void Controller::HandleInput(bool &running, Gameboard &gameboard) const {
         break;
 
       case SDLK_SPACE:
-        running = false;
+        gameboard.LockMino();
+        gameboard.GetNextMino();
+        gameboard.LineElimination();
         break;
       }
       // } else if (e.type == SDL_MOUSEMOTION) {
