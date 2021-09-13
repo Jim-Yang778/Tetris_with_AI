@@ -154,6 +154,7 @@ Tetris: CMakeFiles/Tetris.dir/src/renderer.cpp.o
 Tetris: CMakeFiles/Tetris.dir/src/tetris.cpp.o
 Tetris: CMakeFiles/Tetris.dir/src/gameboard.cpp.o
 Tetris: CMakeFiles/Tetris.dir/build.make
+Tetris: /usr/lib/x86_64-linux-gnu/libSDL2_image.so
 Tetris: CMakeFiles/Tetris.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/jinyu/Tetris/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable Tetris"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Tetris.dir/link.txt --verbose=$(VERBOSE)

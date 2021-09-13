@@ -6,9 +6,6 @@
 class Controller {
  public:
   void HandleInput(bool &running, Gameboard &gameboard) const;
-
-//  private:
-//   void ChangeDirection(Tetris &tetris, Snake::Direction input) const;
 };
 
 #endif

@@ -3,9 +3,7 @@
 #include <cmath>
 #include <iostream>
 
-Game::Game() {
-  game_board = Gameboard();
-}
+Game::Game() { game_board = Gameboard(); }
 
 void Game::Run(Controller const &controller, Renderer &renderer,
                std::size_t target_frame_duration) {
@@ -32,6 +30,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     frame_duration = frame_end - frame_start;
 
     // After every second, update the window title.
+    // And the current tetromino move down one space
     if (frame_end - title_timestamp >= 1000) {
       renderer.UpdateWindowTitle(GetScore(), frame_count);
       frame_count = 0;
@@ -48,7 +47,9 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   }
 }
 
-void Game::Update(bool& running) {
+// One update will refresh the gameboard.
+// And update the position of current moving tetromino if game is still running.
+void Game::Update(bool &running) {
   game_board.FreshBoard();
   game_board.PlaceMino(running);
 }

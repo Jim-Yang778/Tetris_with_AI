@@ -12,9 +12,9 @@ Tetris::Tetris(Mino type, double x, double y) : type_{type}, x_{x}, y_{y} {
     break;
   case Mino::square_mino:
     shape_ = std::vector<std::vector<Mino>>{
-        {type, type, Mino::non_brick, Mino::non_brick},
-        {type, type, Mino::non_brick, Mino::non_brick},
         {Mino::non_brick, Mino::non_brick, Mino::non_brick, Mino::non_brick},
+        {Mino::non_brick, type, type, Mino::non_brick},
+        {Mino::non_brick, type, type, Mino::non_brick},
         {Mino::non_brick, Mino::non_brick, Mino::non_brick, Mino::non_brick}};
     size_ = 2;
     break;

@@ -1,23 +1,30 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include <vector>
 #include "SDL.h"
+#include "SDL_image.h"
 #include "gameboard.h"
+#include <vector>
+
+const std::string kLogoPath{"res/Tetris.png"};
+const std::string kSignPath{"res/Next.png"};
 
 class Renderer {
- public:
+public:
   Renderer(const std::size_t screen_width, const std::size_t screen_height,
            const std::size_t grid_width, const std::size_t grid_height);
   ~Renderer();
 
-  void Render(Gameboard& gameboard);
+  void Render(Gameboard &gameboard);
   void UpdateWindowTitle(int score, int fps);
 
- private:
+private:
   SDL_Window *sdl_window;
   SDL_Renderer *sdl_renderer;
-  SDL_Surface *image;
+  SDL_Surface *sdl_surface;
+
+  SDL_Texture *logo = nullptr;
+  SDL_Texture *sign = nullptr;
 
   const std::size_t screen_width;
   const std::size_t screen_height;

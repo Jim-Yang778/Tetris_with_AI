@@ -8,8 +8,12 @@ Gameboard::Gameboard() {
   // create the 21 * 12 game board (20 * 10 game play area + the border)
   board = std::vector<std::vector<Mino>>(20, NORMAL_LINE);
   board.emplace_back(BORDER_LINE);
-  firm_board = board;
 
+  // Create a firm_board which takes all the sticky tetromino 
+  // and border as the blocks.
+  firm_board = board;
+  
+  // Create the first and second tetromino.
   next_tetris = RandomMino();
   GetNextMino();
 }
@@ -68,6 +72,9 @@ void Gameboard::Rotate() {
     }
     tetris.SetShape(temp);
   }
+  // This is an implementation of NO "wall-kick" rotation system.
+  // Which means that the tetromino is unable to rotate if there
+  // is no place for it to do that.
   tetris.current_pos_.clear();
   for (int i = 0; i < 4; ++i) {
     for (int j = 4; j < 8; ++j) {
@@ -92,14 +99,14 @@ void Gameboard::Rotate() {
 }
 
 // Place the current tetrimino into the board.
-void Gameboard::PlaceMino(bool& running) {
+void Gameboard::PlaceMino(bool &running) {
   tetris.current_pos_.clear();
-  for (int i = 0; i < 4; ++i) {
-    for (int j = 4; j < 8; ++j) {
+  for (int i = 0; i < MID_POS_FRONT; ++i) {
+    for (int j = MID_POS_FRONT; j < MID_POS_BACK; ++j) {
       double x = tetris.GetType() == Mino::straight_mino ? tetris.GetX() - 1
                                                          : tetris.GetX();
       double y = tetris.GetY();
-      if (tetris.GetBlock(i, j - 4) != Mino::non_brick &&
+      if (tetris.GetBlock(i, j - MID_POS_FRONT) != Mino::non_brick &&
           board[i + x][j + y] != Mino::border &&
           firm_board[i + x][j + y] == Mino::non_brick) {
         board[i + x][j + y] = tetris.GetBlock(i, j - 4);
@@ -107,6 +114,8 @@ void Gameboard::PlaceMino(bool& running) {
       }
     }
   }
+  // Each type of tetromino is combined with 4 blocks.
+  // End the game if there is no way to place a new tetromino.
   if (tetris.current_pos_.size() != 4) {
     running = false;
   }
@@ -175,6 +184,7 @@ void Gameboard::MoveMino(Direction dir) {
   }
 }
 
+// Get SDL_color properties base on the type of tetrimino.
 SDL_Color Gameboard::GetColor(Mino mino) const {
   switch (mino) {
   case Mino::straight_mino:
@@ -191,10 +201,13 @@ SDL_Color Gameboard::GetColor(Mino mino) const {
     return {0, 0, 255};
   case Mino::skew_mino:
     return {255, 127, 0};
+  case Mino::border:
+    return {85, 73, 73};
   }
-  return {85, 73, 73};
+  return {0, 0, 0};
 }
 
+// Check each row in the board and eliminate the row that is full.
 void Gameboard::LineElimination() {
   for (auto it = firm_board.begin(); it != firm_board.end() - 1;) {
     // unable to find a "Mino::non_brick" in a single line;
@@ -222,26 +235,36 @@ bool Gameboard::IsTetris(double x, double y) const {
   return true;
 }
 
+// render helper function
+void RenderBlock(SDL_Renderer *sdl_renderer, SDL_Rect &block,
+                 SDL_Color &color) {
+  SDL_SetRenderDrawColor(sdl_renderer, color.r, color.g, color.b, 255);
+  SDL_RenderFillRect(sdl_renderer, &block);
+  SDL_SetRenderDrawColor(sdl_renderer, 219, 219, 219, 255);
+  SDL_RenderDrawRect(sdl_renderer, &block);
+}
+
 // Render the whole gameboard
 void Gameboard::Draw(SDL_Renderer *sdl_renderer, SDL_Rect &block) const {
+  for (int i = 0; i < 4; ++i) {
+    for (int j = 0; j < 4; ++j) {
+      block.x = (14 + j) * BRICK_SIZE;
+      block.y = (5 + i) * BRICK_SIZE;
+      auto mino_color = GetColor(next_tetris.GetBlock(i, j));
+      RenderBlock(sdl_renderer, block, mino_color);
+    }
+  }
+
   for (int i = 0; i < board.size(); ++i) {
     for (int j = 0; j < board[0].size(); ++j) {
       block.x = j * BRICK_SIZE;
       block.y = i * BRICK_SIZE;
       auto mino_color = GetColor(board[i][j]);
       if (IsTetris(i, j)) {
-        SDL_SetRenderDrawColor(sdl_renderer, mino_color.r, mino_color.g,
-                               mino_color.b, 255);
-        SDL_RenderFillRect(sdl_renderer, &block);
-        SDL_SetRenderDrawColor(sdl_renderer, 219, 219, 219, 255);
-        SDL_RenderDrawRect(sdl_renderer, &block);
+        RenderBlock(sdl_renderer, block, mino_color);
       } else {
         if (board[i][j] == Mino::border) {
-          SDL_SetRenderDrawColor(sdl_renderer, mino_color.r, mino_color.g,
-                                 mino_color.b, 255);
-          SDL_RenderFillRect(sdl_renderer, &block);
-          SDL_SetRenderDrawColor(sdl_renderer, 219, 219, 219, 255);
-          SDL_RenderDrawRect(sdl_renderer, &block);
+          RenderBlock(sdl_renderer, block, mino_color);
         } else {
           SDL_SetRenderDrawColor(sdl_renderer, 86, 86, 86, 255);
           SDL_RenderDrawRect(sdl_renderer, &block);

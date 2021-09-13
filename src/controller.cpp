@@ -29,17 +29,7 @@ void Controller::HandleInput(bool &running, Gameboard &gameboard) const {
       case SDLK_ESCAPE:
         running = false;
         break;
-
-      case SDLK_SPACE:
-        gameboard.LockMino();
-        gameboard.GetNextMino();
-        gameboard.LineElimination();
-        break;
       }
-      // } else if (e.type == SDL_MOUSEMOTION) {
-      //   int x, y;
-      //   SDL_GetMouseState( &x, &y );
-      //   std::cout << x << ", " << y << std::endl;
     }
   }
 }

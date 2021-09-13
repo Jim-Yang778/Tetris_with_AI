@@ -6,6 +6,8 @@
 #include <random>
 
 constexpr int BASE_SCORE = 10;
+constexpr int MID_POS_FRONT = 4;
+constexpr int MID_POS_BACK = 8;
 
 enum class Direction : int { up = 0, down, left, right };
 
