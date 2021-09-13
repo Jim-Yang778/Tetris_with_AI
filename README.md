@@ -49,6 +49,8 @@ I build a simple Tetris game. Contains complete game logic, colorful Tetris, and
 
 ## File and Class Structure
 
+<img src="structure.png"/>
+
 ## Rubric Points
 
 - All points in README.
