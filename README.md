@@ -4,6 +4,8 @@ This is a repo for the Capstone project in the [Udacity C++ Nanodegree Program](
 
 I build a simple Tetris game. Contains complete game logic, colorful Tetris, and sign for the next block.
 
+<img src="Tetris_demo.gif"/>
+
 ## Dependencies for Running Locally
 
 * cmake >= 3.7
