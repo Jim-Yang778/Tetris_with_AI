@@ -4,6 +4,9 @@ This is a repo for the Capstone project in the [Udacity C++ Nanodegree Program](
 
 I build a simple Tetris game. Contains complete game logic, colorful Tetris, and sign for the next block.
 
+The "Left", "Right" and "Down" arrow keys each move tetromino one space in the corresponding direction.
+The "Up" arrow keys will trigger the no ["Wall kick"](https://tetris.fandom.com/wiki/Wall_kick) rotation system then rotate the piece if possible.
+
 <img src="Tetris_game.gif"/>
 
 ## Dependencies for Running Locally
@@ -51,6 +54,13 @@ I build a simple Tetris game. Contains complete game logic, colorful Tetris, and
 
 <img src="structure.png"/>
 
+1. The solid line shows that the main function creates Controller, Game and Renderer object.
+
+Inside the Game, we create a gameboard which store all the infomation about the single game. Which includes Tetris and next Tetris, a board represent by a 2D vector. And some methods to handle the behaviour of the current Tetris.
+
+A Tetris is also a class which represents one type of tetromino in the game.
+
+2. The dotted line shows that main calls Game::Run to start the game loop.
 ## Rubric Points
 
 - All points in README.
