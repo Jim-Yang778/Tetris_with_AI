@@ -7,6 +7,8 @@ I build a simple Tetris game. Contains complete game logic, colorful Tetris, and
 The "Left", "Right" and "Down" arrow keys each move tetromino one space in the corresponding direction.
 The "Up" arrow keys will trigger the no ["Wall kick"](https://tetris.fandom.com/wiki/Wall_kick) rotation system then rotate the piece if possible.
 
+Press "ESC" will end the game.
+
 <img src="Tetris_game.gif"/>
 
 ## Dependencies for Running Locally
