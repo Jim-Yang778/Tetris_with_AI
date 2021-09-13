@@ -57,7 +57,7 @@ Press "ESC" will end the game.
 <img src="structure.png"/>
 
 1. The solid line shows that the main function creates Controller, Game and Renderer object.
-Inside the Game, we create a gameboard which store all the infomation about the single game. Which includes Tetris and next Tetris, a board represent by a 2D vector. And some methods to handle the behaviour of the current Tetris.
+Inside the Game, I create a gameboard which store all the infomation about the single game. Which includes Tetris and next Tetris, a board represent by a 2D vector. And some methods to handle the behaviour of the current Tetris.
 A Tetris is also a class which represents one type of tetromino in the game.
 
 2. The dotted line shows that main calls Game::Run to start the game loop.
