@@ -16,7 +16,7 @@ I build a simple Tetris game. Contains complete game logic, colorful Tetris, and
 
   * Linux: make is installed by default on most Linux distros
 
-  * ## Mac: [install Xcode command line tools to get make](https://developer.apple.com/xcode/features/)
+  * Mac: [install Xcode command line tools to get make](https://developer.apple.com/xcode/features/)
 
   * Windows: [Click here for installation instructions](http://gnuwin32.sourceforge.net/packages/make.htm)
 
