@@ -55,7 +55,7 @@ I build a simple Tetris game. Contains complete game logic, colorful Tetris, and
 - All points in Compiling and Testing
 - All points in Loops, Functions, I/O.
 - Object Oriented Programming
-  - Linux: gcc / g++ is installed by default on most Linux distros
+  - The project uses Object Oriented Programming techniques.
   - Classes use appropriate access specifiers for class members.
   - Classes encapsulate behavior.
   - Classes follow an appropriate inheritance hierarchy.
