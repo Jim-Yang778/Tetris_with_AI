@@ -1,8 +1,7 @@
-# CPPND: Tetris
+# Tetris
 
-This is a repo for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213).
-
-I build a simple Tetris game. Contains complete game logic, colorful Tetris, and sign for the next block.
+<!-- This is a repo for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). -->
+This is a simple Tetris game. Contains complete game logic, colorful Tetris, and sign for the next block.
 
 The "Left", "Right" and "Down" arrow keys each move tetromino one space in the corresponding direction.
 The "Up" arrow keys will trigger the no ["Wall kick"](https://tetris.fandom.com/wiki/Wall_kick) rotation system then rotate the piece if possible.
