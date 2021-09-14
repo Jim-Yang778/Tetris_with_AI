@@ -61,7 +61,7 @@ Inside the Game, I create a gameboard which store all the infomation about the s
 A Tetris is also a class which represents one type of tetromino in the game.
 
 2. The dotted line shows that main calls Game::Run to start the game loop.
-## Rubric Points
+<!-- ## Rubric Points
 
 - All points in README.
 - All points in Compiling and Testing
@@ -78,4 +78,4 @@ A Tetris is also a class which represents one type of tetromino in the game.
   - The project uses scope / Resource Acquisition Is Initialization (RAII) where appropriate.
   - The project follows the Rule of 5.
 
-- NO rubric points in Concurrency part.
+- NO rubric points in Concurrency part. -->
