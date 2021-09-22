@@ -1,3 +1,0 @@
-/home/jinyu/Tetris/build/CMakeFiles/rebuild_cache.dir
-/home/jinyu/Tetris/build/CMakeFiles/edit_cache.dir
-/home/jinyu/Tetris/build/CMakeFiles/Tetris.dir
