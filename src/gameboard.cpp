@@ -245,19 +245,22 @@ void RenderBlock(SDL_Renderer *sdl_renderer, SDL_Rect &block,
 }
 
 // Render the whole gameboard
-void Gameboard::Draw(SDL_Renderer *sdl_renderer, SDL_Rect &block) const {
+void Gameboard::Draw(SDL_Renderer *sdl_renderer, SDL_Rect &block, bool is_second_player) const {
+  size_t offset = is_second_player ? 21 * BRICK_SIZE : 0;
+  // render for next mino
   for (int i = 0; i < 4; ++i) {
     for (int j = 0; j < 4; ++j) {
-      block.x = (14 + j) * BRICK_SIZE;
+      block.x = (14 + j) * BRICK_SIZE + offset;
       block.y = (5 + i) * BRICK_SIZE;
       auto mino_color = GetColor(next_tetris.GetBlock(i, j));
       RenderBlock(sdl_renderer, block, mino_color);
     }
   }
 
+  // render for the gameboard
   for (int i = 0; i < board.size(); ++i) {
     for (int j = 0; j < board[0].size(); ++j) {
-      block.x = j * BRICK_SIZE;
+      block.x = j * BRICK_SIZE + offset;
       block.y = i * BRICK_SIZE;
       auto mino_color = GetColor(board[i][j]);
       if (IsTetris(i, j)) {
