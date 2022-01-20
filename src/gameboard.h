@@ -16,10 +16,7 @@ const std::vector<Mino> NORMAL_LINE = {
     Mino::non_brick, Mino::non_brick, Mino::non_brick, Mino::non_brick,
     Mino::non_brick, Mino::non_brick, Mino::non_brick, Mino::border};
 
-const std::vector<Mino> BORDER_LINE = {
-    Mino::border, Mino::border, Mino::border, Mino::border,
-    Mino::border, Mino::border, Mino::border, Mino::border,
-    Mino::border, Mino::border, Mino::border, Mino::border};
+const std::vector<Mino> BORDER_LINE(12, Mino::border);
 
 class Gameboard {
 public:
@@ -45,7 +42,7 @@ public:
   bool DetectBlock(Direction &dir);
   void Rotate();
   void LineElimination();
-  void Draw(SDL_Renderer *sdl_renderer, SDL_Rect &block) const;
+  void Draw(SDL_Renderer *sdl_renderer, SDL_Rect &block, bool is_second_player) const;
 
 private:
   std::random_device dev;

@@ -71,7 +71,7 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(Gameboard &gameboard) {
+void Renderer::Render(Gameboard &gameboard_1, Gameboard &gameboard_2) {
   SDL_Rect block;
   block.w = BRICK_SIZE;
   block.h = BRICK_SIZE;
@@ -94,8 +94,9 @@ void Renderer::Render(Gameboard &gameboard) {
   }
 
   // Render gameboard
-  gameboard.Draw(sdl_renderer, block);
-
+  gameboard_1.Draw(sdl_renderer, block, false);
+  gameboard_2.Draw(sdl_renderer, block, true);
+  
   // Update Screen
   SDL_RenderPresent(sdl_renderer);
 }

@@ -15,7 +15,7 @@ public:
            const std::size_t grid_width, const std::size_t grid_height);
   ~Renderer();
 
-  void Render(Gameboard &gameboard);
+  void Render(Gameboard &gameboard_1, Gameboard &gameboard_2);
   void UpdateWindowTitle(int score, int fps);
 
 private:
