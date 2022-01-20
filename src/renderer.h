@@ -16,7 +16,9 @@ public:
   ~Renderer();
 
   void Render(Gameboard &gameboard_1, Gameboard &gameboard_2);
+  void Render(Gameboard &gameboard);
   void UpdateWindowTitle(int score, int fps);
+  void UpdateWindowTitle(int score_1, int score_2, int fps);
 
 private:
   SDL_Window *sdl_window;
