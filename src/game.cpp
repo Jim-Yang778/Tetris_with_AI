@@ -3,8 +3,8 @@
 #include <cmath>
 #include <iostream>
 
-Game::Game(int mode) { 
-  _mode = mode;
+Game::Game(int mode) {
+  mode_ = mode;
   game_board_1 = Gameboard();
   if (mode > 1) {
     game_board_2 = Gameboard(); 
@@ -24,7 +24,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
-    if (_mode > 1) {
+    if (mode_ > 1) {
       controller.HandleInput(running, game_board_1, game_board_2);
       Update(running);
       renderer.Render(game_board_1, game_board_2);
@@ -44,15 +44,16 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     // After every second, update the window title.
     // And the current tetromino move down one space
     if (frame_end - title_timestamp >= 1000) {
-      if (_mode > 1) {
+      if (mode_ > 1) {
         renderer.UpdateWindowTitle(GetScore(game_board_1), GetScore(game_board_2), frame_count);
       } else {
         renderer.UpdateWindowTitle(GetScore(game_board_1), frame_count);
+        std::cout << GetScore(game_board_1) << std::endl;
       }
       frame_count = 0;
       title_timestamp = frame_end;
       game_board_1.MoveMino(Direction::down);
-      if (_mode > 1) {
+      if (mode_ > 1) {
         game_board_2.MoveMino(Direction::down);
       }
     }
@@ -71,7 +72,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 void Game::Update(bool &running) {
   game_board_1.FreshBoard();
   game_board_1.PlaceMino(running);
-  if (_mode > 1) {
+  if (mode_ > 1) {
     game_board_2.FreshBoard();
     game_board_2.PlaceMino(running);
   }
