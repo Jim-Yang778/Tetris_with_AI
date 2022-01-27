@@ -2,26 +2,8 @@
 #define TETRIS_H
 
 #include "SDL.h"
+#include "variable.h"
 #include <vector>
-
-constexpr int BRICK_SIZE = 30;
-
-enum class Mino : int {
-  straight_mino = 0,
-  square_mino,
-  t_mino,
-  l_mino,
-  reverse_l_mino,
-  reverse_skew_mino,
-  skew_mino,
-  border = -1,
-  non_brick = -2
-};
-
-static std::vector<Mino> ALL_MINOS({Mino::straight_mino, Mino::square_mino,
-                                    Mino::t_mino, Mino::l_mino,
-                                    Mino::reverse_l_mino,
-                                    Mino::reverse_skew_mino, Mino::skew_mino});
 
 class Tetris {
 public:

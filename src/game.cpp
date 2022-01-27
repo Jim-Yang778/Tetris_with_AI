@@ -1,7 +1,6 @@
 #include "game.h"
 #include "SDL.h"
 #include <cmath>
-#include <iostream>
 
 Game::Game(int mode) {
   mode_ = mode;
@@ -48,7 +47,6 @@ void Game::Run(Controller const &controller, Renderer &renderer,
         renderer.UpdateWindowTitle(GetScore(game_board_1), GetScore(game_board_2), frame_count);
       } else {
         renderer.UpdateWindowTitle(GetScore(game_board_1), frame_count);
-        std::cout << GetScore(game_board_1) << std::endl;
       }
       frame_count = 0;
       title_timestamp = frame_end;
@@ -61,8 +59,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     // If the time for this frame is too small (i.e. frame_duration is
     // smaller than the target ms_per_frame), delay the loop to
     // achieve the correct frame rate.
-    if (frame_duration < target_frame_duration) {
-      SDL_Delay(target_frame_duration - frame_duration);
+    if (frame_duration < target_frame_duration) {SDL_Delay(target_frame_duration - frame_duration);
     }
   }
 }

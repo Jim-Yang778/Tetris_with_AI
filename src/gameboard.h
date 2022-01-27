@@ -3,20 +3,8 @@
 
 #include "SDL.h"
 #include "tetris.h"
+#include "variable.h"
 #include <random>
-
-constexpr int BASE_SCORE = 10;
-constexpr int MID_POS_FRONT = 4;
-constexpr int MID_POS_BACK = 8;
-
-enum class Direction : int { up = 0, down, left, right };
-
-const std::vector<Mino> NORMAL_LINE = {
-    Mino::border,    Mino::non_brick, Mino::non_brick, Mino::non_brick,
-    Mino::non_brick, Mino::non_brick, Mino::non_brick, Mino::non_brick,
-    Mino::non_brick, Mino::non_brick, Mino::non_brick, Mino::border};
-
-const std::vector<Mino> BORDER_LINE(12, Mino::border);
 
 class Gameboard {
 public:
