@@ -4,6 +4,15 @@
 #include <vector>
 #include <string>
 
+const float LH_WEIGHT = -4.500f;
+const float RE_WEIGHT = 3.418f;
+const float RT_WEIGHT = -3.218f;
+const float CT_WEIGHT = -9.349f;
+const float NH_WEIGHT = -7.899f;
+const float WS_WEIGHT = -3.386f;
+
+
+
 const std::string kLogoPath{"res/Tetris.png"};
 const std::string kSignPath{"res/Next.png"};
 

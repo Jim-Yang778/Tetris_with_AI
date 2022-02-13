@@ -1,6 +1,6 @@
-#include "controller.h"
+#include "../include/controller.h"
 #include "SDL.h"
-#include "gameboard.h"
+#include "../include/gameboard.h"
 #include <iostream>
 
 void Controller::HandleInput(bool &running, Gameboard &gameboard) const {

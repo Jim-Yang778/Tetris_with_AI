@@ -1,10 +1,12 @@
-#include "game.h"
+#include "../include/game.h"
 #include "SDL.h"
 #include <cmath>
 
 Game::Game(int mode) {
   mode_ = mode;
   game_board_1 = Gameboard();
+  game_board_1.PlaceMino();
+  game_board_1.AIDecideNextMove();
   if (mode > 1) {
     game_board_2 = Gameboard(); 
   }
@@ -50,10 +52,10 @@ void Game::Run(Controller const &controller, Renderer &renderer,
       }
       frame_count = 0;
       title_timestamp = frame_end;
-      game_board_1.MoveMino(Direction::down);
-      if (mode_ > 1) {
-        game_board_2.MoveMino(Direction::down);
-      }
+//      game_board_1.MoveMino(Direction::down);
+//      if (mode_ > 1) {
+//        game_board_2.MoveMino(Direction::down);
+//      }
     }
 
     // If the time for this frame is too small (i.e. frame_duration is
@@ -66,7 +68,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
 // One update will refresh the gameboard.
 // And update the position of current moving tetromino if game is still running.
-void Game::Update(bool &running) {
+void Game::Update(bool& running) {
   game_board_1.FreshBoard();
   game_board_1.PlaceMino(running);
   if (mode_ > 1) {

@@ -1,16 +1,17 @@
-#include "controller.h"
-#include "game.h"
-#include "renderer.h"
+#include "../include/controller.h"
+#include "../include/game.h"
+#include "../include/renderer.h"
 #include <iostream>
 
 int main() {
   // 1.single player 2.local multiplayer
   int mode = 0;
-  while (1) {
+  while (mode == 0) {
     std::cout << "Select a game mode:";
     std::cin >> mode;
     if (mode <= 0 || mode > 2) {
       std::cout << "This is not a valid game mode(1.single player 2.local multiplayer)\n";
+      mode = 0;
     } else {
       break;
     }

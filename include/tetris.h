@@ -3,6 +3,7 @@
 
 #include "SDL.h"
 #include "variable.h"
+#include <utility>
 #include <vector>
 
 class Tetris {
@@ -30,19 +31,21 @@ public:
     shape_[x][y] = new_block;
   }
   void SetShape(std::vector<std::vector<Mino>> new_shape) {
-    shape_ = new_shape;
+    shape_ = std::move(new_shape);
   }
-  void SetX(bool turn_left) {
-    if (turn_left)
-      --x_;
-    else
+  void SetX() {
       ++x_;
   }
-  void SetY(bool turn_down) {
-    if (turn_down)
+  void SetY(bool turn_right) {
+    if (turn_right)
       ++y_;
     else
       --y_;
+  }
+  int GetHeight() const { return height_; }
+  int GetWidth() const { return width_; }
+  void rotated() {
+    std::swap(height_, width_);
   }
 
 private:
@@ -50,6 +53,8 @@ private:
   double y_;
   Mino type_;
   std::vector<std::vector<Mino>> shape_;
+  int height_;
+  int width_;
 };
 
 #endif
