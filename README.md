@@ -1,6 +1,23 @@
 # Tetris
 
-<!-- This is a repo for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). -->
+## (14/2/2022 UPDATE) Tetris AI based on Pierre Dellacherie’s Algorithm
+
+Devised the AI of the Tetris game. The algorithm I used is available 
+
+[here]: https://imake.ninja/el-tetris-an-improvement-on-pierre-dellacheries-algorithm/
+
+. A gif of what it looks like is shown below.
+
+<img src="Tetris_AI.gif"/>
+
+Now in Pseudo random generator(which means I use rand() % 7). The algorithm is able to eliminate 6000+ line of blocks.
+
+<img src="res/test1.png"/>
+
+
+
+## Basic intro
+
 This is a simple Tetris game. Includes complete game logic, colorful Tetris, and sign for the next block.
 
 The "Left", "Right" and "Down" arrow keys each move tetromino one space in the corresponding direction.
