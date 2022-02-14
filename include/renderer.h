@@ -4,10 +4,8 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "gameboard.h"
+#include "variable.h"
 #include <vector>
-
-const std::string kLogoPath{"res/Tetris.png"};
-const std::string kSignPath{"res/Next.png"};
 
 class Renderer {
 public:

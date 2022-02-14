@@ -3,20 +3,9 @@
 
 #include "SDL.h"
 #include "tetris.h"
+#include "variable.h"
 #include <random>
-
-constexpr int BASE_SCORE = 10;
-constexpr int MID_POS_FRONT = 4;
-constexpr int MID_POS_BACK = 8;
-
-enum class Direction : int { up = 0, down, left, right };
-
-const std::vector<Mino> NORMAL_LINE = {
-    Mino::border,    Mino::non_brick, Mino::non_brick, Mino::non_brick,
-    Mino::non_brick, Mino::non_brick, Mino::non_brick, Mino::non_brick,
-    Mino::non_brick, Mino::non_brick, Mino::non_brick, Mino::border};
-
-const std::vector<Mino> BORDER_LINE(12, Mino::border);
+#include <climits>
 
 class Gameboard {
 public:
@@ -28,35 +17,47 @@ public:
   ~Gameboard() = default;
 
   // Getter / Setter
-  int GetScore() const { return score; }
+  unsigned long long GetScore() const { return score; }
   void SetScore(int count) {
     score += count == 0 ? 0 : BASE_SCORE * std::pow(2, count);
   }
+  Tetris getTetris() const { return tetris; };
+  int GetLine() const { return line_elimination; };
 
   // functions
   void GetNextMino();
   void FreshBoard() { board = firm_board; }
-  void LockMino() { firm_board = std::move(board); }
+  void LockMino() { firm_board = board; }
   void PlaceMino(bool& running);
-  void MoveMino(Direction dir);
-  bool DetectBlock(Direction &dir);
+  void PlaceMino();
+  bool MoveMino(Direction dir);
   void Rotate();
-  void LineElimination();
+  int LineElimination();
   void Draw(SDL_Renderer *sdl_renderer, SDL_Rect &block, bool is_second_player) const;
 
+  std::vector<int> AIDecideNextMove();
+  static int mode_;
+
 private:
-  std::random_device dev;
-  std::mt19937 engine;
-  std::uniform_int_distribution<int> random_tetris{0, 6};
   Mino RandomMino();
   bool IsTetris(double x, double y) const;
   SDL_Color GetColor(Mino mino) const;
-
+private:
   std::vector<std::vector<Mino>> firm_board;
   std::vector<std::vector<Mino>> board;
-  int score{0};
+  unsigned long long score{0};
+
+private:
   Tetris tetris;
   Tetris next_tetris;
+  int line_elimination{0};
+private:
+  // AI related helper function
+  float LandingHeight();
+  std::pair<float, float> NumbersOfHolesAndColumnTransitions();
+  float RowTransitions();
+  float WellSums();
+
 };
 
 #endif

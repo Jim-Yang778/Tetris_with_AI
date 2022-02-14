@@ -1,13 +1,13 @@
-#include "game.h"
+#include "../include/game.h"
 #include "SDL.h"
 #include <cmath>
-#include <iostream>
 
-Game::Game(int mode) { 
-  _mode = mode;
+Game::Game(int mode) {
+  Gameboard::mode_ = mode;
   game_board_1 = Gameboard();
+  game_board_1.PlaceMino();
   if (mode > 1) {
-    game_board_2 = Gameboard(); 
+    game_board_1.AIDecideNextMove();
   }
 }
 
@@ -24,15 +24,9 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
-    if (_mode > 1) {
-      controller.HandleInput(running, game_board_1, game_board_2);
-      Update(running);
-      renderer.Render(game_board_1, game_board_2);
-    } else {
-      controller.HandleInput(running, game_board_1);
-      Update(running);
-      renderer.Render(game_board_1);
-    }
+    controller.HandleInput(running, game_board_1);
+    Update(running);
+    renderer.Render(game_board_1);
 
     frame_end = SDL_GetTicks();
 
@@ -44,35 +38,23 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     // After every second, update the window title.
     // And the current tetromino move down one space
     if (frame_end - title_timestamp >= 1000) {
-      if (_mode > 1) {
-        renderer.UpdateWindowTitle(GetScore(game_board_1), GetScore(game_board_2), frame_count);
-      } else {
-        renderer.UpdateWindowTitle(GetScore(game_board_1), frame_count);
-      }
+      renderer.UpdateWindowTitle(GetScore(game_board_1), frame_count);
       frame_count = 0;
       title_timestamp = frame_end;
       game_board_1.MoveMino(Direction::down);
-      if (_mode > 1) {
-        game_board_2.MoveMino(Direction::down);
-      }
     }
 
     // If the time for this frame is too small (i.e. frame_duration is
     // smaller than the target ms_per_frame), delay the loop to
     // achieve the correct frame rate.
-    if (frame_duration < target_frame_duration) {
-      SDL_Delay(target_frame_duration - frame_duration);
+    if (frame_duration < target_frame_duration) {SDL_Delay(target_frame_duration - frame_duration);
     }
   }
 }
 
 // One update will refresh the gameboard.
 // And update the position of current moving tetromino if game is still running.
-void Game::Update(bool &running) {
+void Game::Update(bool& running) {
   game_board_1.FreshBoard();
   game_board_1.PlaceMino(running);
-  if (_mode > 1) {
-    game_board_2.FreshBoard();
-    game_board_2.PlaceMino(running);
-  }
 }

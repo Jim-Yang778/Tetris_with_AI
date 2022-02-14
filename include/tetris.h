@@ -2,26 +2,9 @@
 #define TETRIS_H
 
 #include "SDL.h"
+#include "variable.h"
+#include <utility>
 #include <vector>
-
-constexpr int BRICK_SIZE = 30;
-
-enum class Mino : int {
-  straight_mino = 0,
-  square_mino,
-  t_mino,
-  l_mino,
-  reverse_l_mino,
-  reverse_skew_mino,
-  skew_mino,
-  border = -1,
-  non_brick = -2
-};
-
-static std::vector<Mino> ALL_MINOS({Mino::straight_mino, Mino::square_mino,
-                                    Mino::t_mino, Mino::l_mino,
-                                    Mino::reverse_l_mino,
-                                    Mino::reverse_skew_mino, Mino::skew_mino});
 
 class Tetris {
 public:
@@ -48,19 +31,21 @@ public:
     shape_[x][y] = new_block;
   }
   void SetShape(std::vector<std::vector<Mino>> new_shape) {
-    shape_ = new_shape;
+    shape_ = std::move(new_shape);
   }
-  void SetX(bool turn_left) {
-    if (turn_left)
-      --x_;
-    else
+  void SetX() {
       ++x_;
   }
-  void SetY(bool turn_down) {
-    if (turn_down)
+  void SetY(bool turn_right) {
+    if (turn_right)
       ++y_;
     else
       --y_;
+  }
+  int GetHeight() const { return height_; }
+  int GetWidth() const { return width_; }
+  void rotated() {
+    std::swap(height_, width_);
   }
 
 private:
@@ -68,6 +53,8 @@ private:
   double y_;
   Mino type_;
   std::vector<std::vector<Mino>> shape_;
+  int height_;
+  int width_;
 };
 
 #endif
