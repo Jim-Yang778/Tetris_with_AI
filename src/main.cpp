@@ -1,25 +1,22 @@
 #include "../include/controller.h"
 #include "../include/game.h"
-#include "../include/renderer.h"
 #include <iostream>
 
 int main() {
-  // 1.single player 2.local multiplayer
+  // 1.single player 2.AI player
   int mode = 0;
   while (mode == 0) {
     std::cout << "Select a game mode:";
     std::cin >> mode;
     if (mode <= 0 || mode > 2) {
-      std::cout << "This is not a valid game mode(1.single player 2.local multiplayer)\n";
+      std::cout << "This is not a valid game mode(1.single player 2.AI player)\n";
       mode = 0;
     } else {
       break;
     }
   }
+  srand((unsigned)time(nullptr));
   size_t width = kScreenWidth;
-  if(mode > 1) {
-    width *= 2;
-  }
   Renderer renderer(width, kScreenHeight, kGridWidth, kGridHeight);
   Controller controller;
   Game game = Game(mode);

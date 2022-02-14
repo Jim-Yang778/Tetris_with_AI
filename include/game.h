@@ -16,15 +16,10 @@ public:
   int GetScore(Gameboard &board) const { return board.GetScore(); }
   void PrintScore() const {
     std::cout << "Player 1 Score: " << game_board_1.GetScore() << "\n";
-    if (mode_ > 1) {
-      std::cout << "Player 2 Score: " << game_board_2.GetScore() << "\n";
-    }
+    std::cout << "Player 1 Eliminate " << game_board_1.GetLine() << " lines\n";
   }
-
 private:
-  int mode_ = 0;
   Gameboard game_board_1;
-  Gameboard game_board_2;
 
   void Update(bool& runnning);
 };

@@ -4,12 +4,12 @@
 #include <vector>
 #include <string>
 
-const float LH_WEIGHT = -4.500f;
-const float RE_WEIGHT = 3.418f;
-const float RT_WEIGHT = -3.218f;
-const float CT_WEIGHT = -9.349f;
-const float NH_WEIGHT = -7.899f;
-const float WS_WEIGHT = -3.386f;
+const float LH_WEIGHT = -4.500158825082766;
+const float RE_WEIGHT = 3.4181268101392694;
+const float RT_WEIGHT = -3.2178882868487753;
+const float CT_WEIGHT = -9.348695305445199;
+const float NH_WEIGHT = -7.899265427351652;
+const float WS_WEIGHT = -3.3855972247263626;
 
 
 

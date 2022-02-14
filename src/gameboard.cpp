@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <iostream>
 
+int Gameboard::mode_ = 0;
+
 Gameboard::Gameboard() {
 
   // create the 21 * 12 game board (20 * 10 game play area + the border)
@@ -22,7 +24,6 @@ Gameboard::Gameboard(const Gameboard &source) {
   firm_board = source.firm_board;
   tetris = source.tetris;
   next_tetris = source.next_tetris;
-  engine = source.engine;
   line_elimination = source.line_elimination;
 }
 
@@ -31,13 +32,12 @@ Gameboard &Gameboard::operator=(const Gameboard &source) {
   tetris = source.tetris;
   firm_board = source.firm_board;
   next_tetris = source.next_tetris;
-  engine = source.engine;
   line_elimination = source.line_elimination;
   return *this;
 }
 
 // Select a random tetromino from the "Mino" enum class
-Mino Gameboard::RandomMino() { return ALL_MINOS[random_tetris(engine)]; }
+Mino Gameboard::RandomMino() { return ALL_MINOS[rand() % 7]; }
 
 /*
 Setting tne next tetromino as the current tetromino.
@@ -79,8 +79,7 @@ void Gameboard::Rotate() {
   tetris.current_pos_.clear();
   for (int i = 0; i < 4; ++i) {
     for (int j = 4; j < 8; ++j) {
-      double x = tetris.GetType() == Mino::straight_mino ? tetris.GetX() - 1
-                                                         : tetris.GetX();
+      double x = tetris.GetX();
       double y = tetris.GetY();
       if (i + x >= 21 || j + y >= 12 || i + x < 0) {
         tetris.SetShape(pre_shape);
@@ -129,8 +128,9 @@ void Gameboard::PlaceMino() {
   tetris.current_pos_.clear();
   for (int i = 0; i < MID_POS_FRONT; ++i) {
     for (int j = MID_POS_FRONT; j < MID_POS_BACK; ++j) {
-      double x = tetris.GetType() == Mino::straight_mino ? tetris.GetX() - 1
-                                                         : tetris.GetX();
+//      double x = tetris.GetType() == Mino::straight_mino ? tetris.GetX() - 1
+//                                                         : tetris.GetX();
+      double x = tetris.GetX();
       double y = tetris.GetY();
       if (tetris.GetBlock(i, j - MID_POS_FRONT) != Mino::non_brick &&
           board[i + x][j + y] != Mino::border &&
@@ -200,10 +200,13 @@ bool Gameboard::MoveMino(Direction dir) {
       LockMino();
       GetNextMino();
       LineElimination();
-      AIDecideNextMove();
+      if (Gameboard::mode_ > 1) {
+        AIDecideNextMove();
+      }
     }
     break;
   }
+
   return can_move;
 }
 
@@ -304,23 +307,23 @@ void Gameboard::Draw(SDL_Renderer *sdl_renderer, SDL_Rect &block, bool is_second
 
 ///////////////////// AI related function ////////////////////////
 
-int Gameboard::LandingHeight() {
+float Gameboard::LandingHeight() {
   int lh = INT_MAX;
   for (auto& each : tetris.current_pos_) {
     lh = std::min(each.first, lh);
   }
-  return 20 - lh;
+  return 20.0f - lh - float(tetris.GetHeight()) / 2;
 }
-std::pair<int, int> Gameboard::NumbersOfHolesAndColumnTransitions() {
-  int nh = 0;
-  int ct = 0;
+std::pair<float, float> Gameboard::NumbersOfHolesAndColumnTransitions() {
+  float nh = 0;
+  float ct = 0;
   for (int i = 1; i <= 10; ++i) {
-    for (int j = 0; j <= 18; ++j) {
+    for (int j = 0; j <= 19; ++j) {
       if ((board[j][i] != Mino::non_brick && board[j + 1][i] == Mino::non_brick) ||
           (board[j][i] == Mino::non_brick && board[j + 1][i] != Mino::non_brick)) {
         ++ct;
       }
-      if (j <= 17) {
+      if (j <= 18) {
         if (board[j][i] != Mino::non_brick &&
             board[j + 1][i] == Mino::non_brick &&
             board[j + 2][i] != Mino::non_brick) {
@@ -332,11 +335,10 @@ std::pair<int, int> Gameboard::NumbersOfHolesAndColumnTransitions() {
   return std::make_pair(ct, nh);
 }
 
-int Gameboard::RowTransitions() {
-  int rt = 0;
-  for (int i = 0; i <= 19; ++i) {
-    if (board[i] == NORMAL_LINE) continue;
-    for (int j = 1; j <= 9; ++j) {
+float Gameboard::RowTransitions() {
+  float rt = 0;
+  for (int i = 0; i < 20; ++i) {
+    for (int j = 0; j <= 10; ++j) {
       if ((board[i][j] == Mino::non_brick && board[i][j + 1] != Mino::non_brick) ||
           (board[i][j] != Mino::non_brick && board[i][j + 1] == Mino::non_brick)){
         ++rt;
@@ -346,10 +348,10 @@ int Gameboard::RowTransitions() {
   return rt;
 }
 
-int Gameboard::WellSums() {
-  int ws = 0;
+float Gameboard::WellSums() {
+  float ws = 0;
   for (int i = 1; i <= 10; ++i) {
-    for (int j = 0; j <= 18; ++j) {
+    for (int j = 0; j <= 19; ++j) {
       if (board[j][i - 1] != Mino::non_brick &&
           board[j][i] == Mino::non_brick &&
           board[j][i + 1] != Mino::non_brick) {
@@ -371,14 +373,14 @@ std::vector<int> Gameboard::AIDecideNextMove() {
   Gameboard simulation;
   float max_score = INT_MIN;
   std::vector<int> best_move;
-  std::vector<int> params(6);
+//  std::vector<float> params;
   // i: number of rotate
   for (int i = 0; i <= 3; ++i) {
     simulation = *this;
     std::vector<int> curr_move{0, 0, 0};  //horizontal step, vertical step, rotate
-    int RE = 0;
+    float RE = 0;
     while (curr_move[2] < i) {
-      simulation.Rotate();
+      simulation.MoveMino(Direction::up);
       simulation.FreshBoard();
       simulation.PlaceMino();
       ++curr_move[2];
@@ -414,17 +416,17 @@ std::vector<int> Gameboard::AIDecideNextMove() {
       }
       RE = simulation.LineElimination();
       // calculate the parameters
-      int LH = simulation.LandingHeight();
+      float LH = simulation.LandingHeight();
       auto temp = simulation.NumbersOfHolesAndColumnTransitions();
-      int CT = temp.first;
-      int NH = temp.second;
-      int RT = simulation.RowTransitions();
-      int WS = simulation.WellSums();
+      float CT = temp.first;
+      float NH = temp.second;
+      float RT = simulation.RowTransitions();
+      float WS = simulation.WellSums();
       float curr_score = (LH * LH_WEIGHT) + (RE * RE_WEIGHT) +  (RT * RT_WEIGHT) + (CT * CT_WEIGHT) + (NH * NH_WEIGHT) + (WS * WS_WEIGHT);
       if (max_score < curr_score) {
         max_score = curr_score;
         // memorise the step it does
-        params = std::vector<int>{LH, RE, RT, CT, NH, WS};
+//        params = std::vector<float>{LH, RE, RT, CT, NH, WS};
         best_move = curr_move;
       } else if (max_score == curr_score) {
           int priority_best = 100 * (abs(best_move[0]) + abs(best_move[1])) + best_move[2];
@@ -432,7 +434,7 @@ std::vector<int> Gameboard::AIDecideNextMove() {
           if (priority_curr < priority_best) {
             max_score = curr_score;
             // memorise the step it does
-            params = std::vector<int>{LH, RE, RT, CT, NH, WS};
+//            params = std::vector<float>{LH, RE, RT, CT, NH, WS};
             best_move = curr_move;
           }
       }
@@ -445,27 +447,33 @@ std::vector<int> Gameboard::AIDecideNextMove() {
       ++curr_move[0];
     }
   }
-  std::cout << "The best parameter is: " << std::endl;
-  std::cout << "LH: " << params[0] << std::endl;
-  std::cout << "RE: " << params[1] << std::endl;
-  std::cout << "RT: " << params[2] << std::endl;
-  std::cout << "CT: " << params[3] << std::endl;
-  std::cout << "NH: " << params[4] << std::endl;
-  std::cout << "WS: " << params[5] << std::endl;
-  std::cout << "And the move is: " << std::endl;
-  std::cout << "move left: " << best_move[0] << std::endl;
-  std::cout << "move down: " << best_move[1] << std::endl;
-  std::cout << "rotate: " << best_move[2] << std::endl;
+//  std::cout << "The best parameter is: " << std::endl;
+//  std::cout << "LH: " << params[0] << std::endl;
+//  std::cout << "RE: " << params[1] << std::endl;
+//  std::cout << "RT: " << params[2] << std::endl;
+//  std::cout << "CT: " << params[3] << std::endl;
+//  std::cout << "NH: " << params[4] << std::endl;
+//  std::cout << "WS: " << params[5] << std::endl;
+//  std::cout << "And the move is: " << std::endl;
+//  std::cout << "move left: " << best_move[0] << std::endl;
+//  std::cout << "move down: " << best_move[1] << std::endl;
+//  std::cout << "rotate: " << best_move[2] << std::endl;
   for (int i = 0; i < best_move[2]; ++i) {
-    Rotate();
+    MoveMino(Direction::up);
+    FreshBoard();
+    PlaceMino();
   }
+  int horizontalMove = abs(best_move[0]);
   Direction dir = best_move[0] < 0 ? Direction::left : Direction::right;
-  for (int i = 0; i < abs(best_move[0]); ++i) {
+  for (int i = 0; i < horizontalMove; ++i) {
     MoveMino(dir);
+    FreshBoard();
+    PlaceMino();
   }
-//  for (int i = 0; i < best_move[1] - 1; ++i) {
-//    MoveMino(Direction::down);
-//  }
-
+  for (int i = 0; i < best_move[1] - 1; ++i) {
+    MoveMino(Direction::down);
+    FreshBoard();
+    PlaceMino();
+  }
   return best_move;
 }
