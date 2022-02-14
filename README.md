@@ -2,9 +2,7 @@
 
 ## (14/2/2022 UPDATE) Tetris AI based on Pierre Dellacherie’s Algorithm
 
-Devised the AI of the Tetris game. The algorithm I used is available 
-
-[here]: https://imake.ninja/el-tetris-an-improvement-on-pierre-dellacheries-algorithm/
+Devised the AI of the Tetris game. The algorithm I used is available [here](https://imake.ninja/el-tetris-an-improvement-on-pierre-dellacheries-algorithm/).
 
 . A gif of what it looks like is shown below.
 
