@@ -42,7 +42,7 @@ enum class Mino : int {
   non_brick = -2
 };
 
-static std::vector<Mino> ALL_MINOS{Mino::straight_mino, Mino::square_mino,
+const std::vector<Mino> ALL_MINOS{Mino::straight_mino, Mino::square_mino,
                                    Mino::t_mino, Mino::l_mino,
                                    Mino::reverse_l_mino,
                                    Mino::reverse_skew_mino, Mino::skew_mino};

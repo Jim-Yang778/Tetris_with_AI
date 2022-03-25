@@ -105,8 +105,6 @@ void Gameboard::PlaceMino(bool& running) {
   tetris.current_pos_.clear();
   for (int i = 0; i < MID_POS_FRONT; ++i) {
     for (int j = MID_POS_FRONT; j < MID_POS_BACK; ++j) {
-//      double x = tetris.GetType() == Mino::straight_mino ? tetris.GetX() - 1
-//                                                         : tetris.GetX();
       double x = tetris.GetX();
       double y = tetris.GetY();
       if (tetris.GetBlock(i, j - MID_POS_FRONT) != Mino::non_brick &&
@@ -128,8 +126,6 @@ void Gameboard::PlaceMino() {
   tetris.current_pos_.clear();
   for (int i = 0; i < MID_POS_FRONT; ++i) {
     for (int j = MID_POS_FRONT; j < MID_POS_BACK; ++j) {
-//      double x = tetris.GetType() == Mino::straight_mino ? tetris.GetX() - 1
-//                                                         : tetris.GetX();
       double x = tetris.GetX();
       double y = tetris.GetY();
       if (tetris.GetBlock(i, j - MID_POS_FRONT) != Mino::non_brick &&
